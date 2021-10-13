@@ -6,8 +6,7 @@
   "scripts": {
     "start": "webpack serve --mode=development --config webpack.dev.js",
     "build": "webpack build --mode=production --config webpack.prod.js",
-    "build:clean": "rm -rf build",
-    "npm:install": "rm -rf node_modules && npm install"
+    "serve": "npm run build && cd build && serve -l 9001"
   },
   "keywords": [],
   "author": "",
