@@ -6,6 +6,8 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 const { ModuleFederationPlugin } = require("webpack").container;
 
+const packageDependencies = require("./package.json").dependencies;
+
 module.exports = {
   mode: "production",
   entry: "./src/index.js",
@@ -19,6 +21,10 @@ module.exports = {
         test: /\.(js|jsx)/,
         exclude: /node_modules/,
         loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-react"],
+          plugins: ["@babel/plugin-proposal-class-properties"],
+        },
       },
       {
         test: /\.css/,
@@ -36,9 +42,19 @@ module.exports = {
       filename: "container.style.[contenthash].css",
     }),
     new ModuleFederationPlugin({
-      name: "ContainerApp",
       remotes: {
         ProductsModule: "ProductsModule@http://localhost:9001/remoteEntry.js",
+        CartModule: "CartModule@http://localhost:9002/remoteEntry.js",
+      },
+      shared: {
+        react: {
+          version: packageDependencies.react,
+          singleton: true,
+        },
+        "react-dom": {
+          version: packageDependencies["react-dom"],
+          singleton: true,
+        },
       },
     }),
   ],
