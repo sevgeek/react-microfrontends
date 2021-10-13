@@ -14,7 +14,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "bundle.js",
-    publicPath: "http://localhost:9002/",
+    publicPath: "auto",
   },
   module: {
     rules: [
@@ -22,6 +22,10 @@ module.exports = {
         test: /\.(js|jsx)/,
         exclude: /node_modules/,
         loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-react"],
+          plugins: ["@babel/plugin-proposal-class-properties"],
+        },
       },
       {
         test: /\.css/,
@@ -35,11 +39,21 @@ module.exports = {
     }),
     new ModuleFederationPlugin({
       name: "CartModule",
+      library: { type: "var", name: "CartModule" },
       filename: "remoteEntry.js",
       exposes: {
         "./Cart": "./src/index.js",
       },
-      shared: packageDependencies,
+      shared: {
+        react: {
+          version: packageDependencies.react,
+          singleton: true,
+        },
+        "react-dom": {
+          version: packageDependencies["react-dom"],
+          singleton: true,
+        },
+      },
     }),
   ],
 };
