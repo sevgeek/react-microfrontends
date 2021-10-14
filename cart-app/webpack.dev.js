@@ -42,7 +42,7 @@ module.exports = {
       library: { type: "var", name: "CartModule" },
       filename: "remoteEntry.js",
       exposes: {
-        "./Cart": "./src/index.js",
+        "./Cart": "./src/bootstrap.js",
       },
       shared: {
         react: {

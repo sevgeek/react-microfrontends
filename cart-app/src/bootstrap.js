@@ -3,4 +3,21 @@ import ReactDOM from "react-dom";
 
 import App from "./App";
 
-ReactDOM.render(<App />, document.getElementById("cart-root"));
+/**
+ * Функция монтирования приложения
+ * в корневой DOM-элемент
+ * @param {DOMElement} element Корневой элемент
+ * @returns {void}
+ */
+function mount(element) {
+  ReactDOM.render(<App />, element);
+}
+
+/* Если находимся в режиме разработки */
+if (process.env.NODE_ENV === "development") {
+  const root = document.getElementById("root");
+
+  if (root) mount(root);
+}
+
+export { mount };
