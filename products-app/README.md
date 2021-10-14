@@ -92,6 +92,10 @@ module.exports = {
         test: /\.(js|jsx)/,
         exclude: /node_modules/,
         loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-react"],
+          plugins: ["@babel/plugin-proposal-class-properties"],
+        },
       },
       {
         test: /\.css/,
@@ -105,17 +109,6 @@ module.exports = {
     }),
   ],
 };
-```
-
-## 4. Настройка Babel
-
-4.1 Создание конфигурационного файла Babel `./babel.config.json` со следующим содержимым:
-
-```json
-{
-  "presets": ["@babel/preset-react"],
-  "plugins": ["@babel/plugin-proposal-class-properties"]
-}
 ```
 
 ## 5. Добавление NPM-скриптов
