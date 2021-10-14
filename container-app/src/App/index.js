@@ -1,10 +1,16 @@
 import React from "react";
 
-import "ProductsModule/Products";
-import "CartModule/Cart";
+import ProductsApp from "../ProductsApp";
+import CartApp from "../CartApp";
 
 function App() {
-  return <h1>Container</h1>;
+  return (
+    <React.Fragment>
+      <h1>Container</h1>
+      <ProductsApp />
+      <CartApp />
+    </React.Fragment>
+  );
 }
 
 export default App;
