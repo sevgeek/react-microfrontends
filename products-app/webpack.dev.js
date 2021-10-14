@@ -42,7 +42,7 @@ module.exports = {
       library: { type: "var", name: "ProductsModule" },
       filename: "remoteEntry.js",
       exposes: {
-        "./Products": "./src/index.js",
+        "./Products": "./src/bootstrap.js",
       },
       shared: {
         react: {
