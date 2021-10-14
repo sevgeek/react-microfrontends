@@ -12,7 +12,7 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "./build"),
-    filename: "products.bundle.[contenthash].js",
+    filename: "products.[name].[contenthash].js",
     publicPath: "auto",
   },
   optimization: {
@@ -41,7 +41,7 @@ module.exports = {
     new TerserPlugin(),
     new CleanWebpackPlugin(),
     new MiniCSSExtractPlugin({
-      filename: "products.style.[name].[contenthash].css",
+      filename: "products.[name].[contenthash].css",
     }),
     new ModuleFederationPlugin({
       name: "ProductsModule",

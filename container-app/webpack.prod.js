@@ -13,7 +13,12 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "./build"),
-    filename: "container.bundle.[contenthash].js",
+    filename: "container.[name].[contenthash].js",
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
   },
   module: {
     rules: [
@@ -39,7 +44,7 @@ module.exports = {
       template: "./public/index.html",
     }),
     new MiniCSSExtractPlugin({
-      filename: "container.style.[contenthash].css",
+      filename: "container.[name].[contenthash].css",
     }),
     new ModuleFederationPlugin({
       remotes: {
